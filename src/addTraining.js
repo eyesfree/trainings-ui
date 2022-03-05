@@ -41,7 +41,7 @@ export default class FileInput extends React.Component {
             "price": this.trainingPrice.current.value,
             "currency": this.priceCurrency.current.value,
             "startDates": [
-                { "startDate" : this.dateTime }
+                { "startDate": this.dateTime }
             ]
         }
 
@@ -51,13 +51,23 @@ export default class FileInput extends React.Component {
             body: JSON.stringify(training)
         };
 
-        fetch('http://localhost:8080/v1/training', requestOptions)
-            .then(response => response.json())
-            .then(data => console.log(data));
-
-        alert(
-            `new training id - ${this.trainingId}`
-        );
+        fetch('http://training-catalog.azurewebsites.net/v1/training', requestOptions)
+            .then((response) => {
+                if (response.status === 201) {
+                    alert(
+                        `Training submitted successfully`
+                    )
+                }
+                return response.json()
+            })
+            .then(
+                (data) => console.log(data),
+                )
+            .catch((error) => {
+                alert(
+                    `error while submitting training ${error}`
+                );
+            });
     }
 
     render() {
@@ -83,7 +93,7 @@ export default class FileInput extends React.Component {
                         <label>
                             Price currency:
                             <Select
-                                sx={{ minWidth: 50 }}
+                                sx={{ height: 30, width: 100 }}
                                 value={this.priceCurrency.value}
                                 ref={this.priceCurrency}
                                 onChange={this.handlePriceCurrencyChange}
@@ -100,7 +110,7 @@ export default class FileInput extends React.Component {
                                 renderInput={(props) => <TextField {...props} />}
                                 label="DateTimePicker"
                                 value={this.dateTime}
-                                onChange={this.handleDateTimeChange}                               
+                                onChange={this.handleDateTimeChange}
                             />
                         </LocalizationProvider>
                         <br />
