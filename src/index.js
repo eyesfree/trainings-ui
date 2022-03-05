@@ -20,7 +20,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+
+import FileInput from './addTraining.js'
 
 const backendUrl = "http://localhost:8080/v1/training";
 function UsersComponent() {
@@ -102,7 +103,6 @@ function UsersComponent() {
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Available trainings" {...tabProperties(0)} />
             <Tab label="Add training" {...tabProperties(1)} />
-            <Tab label="Edit training" {...tabProperties(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -117,38 +117,24 @@ function UsersComponent() {
           </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
+          <FileInput />
         </TabPanel>
       </div>
     );
   }
 
-  function renderTraining() {
-    return ({ index, style }) => {
-      var item = items[index];
-      return (
-        <ListItem style={style} key={index} disablePadding>
-          <ListItemText primary={`${item.name} ${item.teacher} ${item.price} ${item.duration}`} />
-        </ListItem>
-      );
-    };
-  }
-
   function renderTrainingInAccordion() {
-    return ({ index, style }) => {
+    return ({ index }) => {
       var item = items[index];
       return (
         <Accordion expanded={expanded === index} onChange={handlePanelChange(index)}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header">
-            <Typography>{item.name} - <i>{item.description}</i></Typography>
+            <Typography component={'span'}>{item.name} - <i>{item.description}</i></Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
+            <Typography component={'span'}>
 
               Teacher: {item.teacher} Price: {item.price}{item.currency} Duration: {item.duration} {item.durationFormat}
 
@@ -170,8 +156,6 @@ function UsersComponent() {
                   </ListItem>
                 ))}
               </List>
-
-
             </Typography>
           </AccordionDetails>
         </Accordion>
