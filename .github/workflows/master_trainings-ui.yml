@@ -55,7 +55,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'randomusers-ui'
+          app-name: 'trainings-ui'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_51CF1EB2206B4D2C9176874EA5E51039 }}
           package: release.zip
