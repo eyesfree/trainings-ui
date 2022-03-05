@@ -23,7 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import FileInput from './addTraining.js'
 
-const backendUrl = "http://training-catalog.azurewebsites.net/v1/training";
+const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
 function UsersComponent() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);

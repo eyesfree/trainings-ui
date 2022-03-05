@@ -51,7 +51,7 @@ export default class FileInput extends React.Component {
             body: JSON.stringify(training)
         };
 
-        fetch('http://training-catalog.azurewebsites.net/v1/training', requestOptions)
+        fetch('https://training-catalog.azurewebsites.net/v1/training', requestOptions)
             .then((response) => {
                 if (response.status === 201) {
                     alert(
