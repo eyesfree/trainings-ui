@@ -21,9 +21,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-import FileInput from './addTraining.js'
+import AddTraining from './addTraining.js'
 
-const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
+// export const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
+export const backendUrl = "http://localhost:8080/v1/training";
 function UsersComponent() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,7 +57,7 @@ function UsersComponent() {
           }
         )
     }
-  })
+  }, [isLoaded])
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,7 +72,7 @@ function UsersComponent() {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography component={'span'}>{children}</Typography>
           </Box>
         )}
       </div>
@@ -117,7 +118,7 @@ function UsersComponent() {
           </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <FileInput />
+          <AddTraining setIsLoaded={setIsLoaded}/>
         </TabPanel>
       </div>
     );
@@ -163,8 +164,6 @@ function UsersComponent() {
     };
   }
 }
-
-
 
 ReactDOM.render(
   <UsersComponent />,

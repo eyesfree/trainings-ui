@@ -8,8 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
+import { backendUrl } from '.';
 
-export default class FileInput extends React.Component {
+export default class AddTraining extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +21,6 @@ export default class FileInput extends React.Component {
         this.teacher = React.createRef();
         this.duration = React.createRef();
         this.startDate = React.createRef();
-        this.setDateTime = this.handleDateTimeChange.bind(this);
         this.dateTime = Date.now();
     }
 
@@ -29,8 +29,9 @@ export default class FileInput extends React.Component {
         this.priceCurrency.current.value = event.target.value;
     };
 
-    handleDateTimeChange = (event) => {
-        this.dateTime = event;
+    handleDateTimeChange = (newValue) => {
+        console.log(newValue);
+        this.dateTime = newValue;
     };
 
     handleSubmit(event) {
@@ -51,7 +52,7 @@ export default class FileInput extends React.Component {
             body: JSON.stringify(training)
         };
 
-        fetch('https://training-catalog.azurewebsites.net/v1/training', requestOptions)
+        fetch(backendUrl, requestOptions)
             .then((response) => {
                 if (response.status === 201) {
                     alert(
@@ -61,7 +62,10 @@ export default class FileInput extends React.Component {
                 return response.json()
             })
             .then(
-                (data) => console.log(data),
+                (data) => {
+                    console.log(data);
+                    this.props.setIsLoaded(false);
+                }
                 )
             .catch((error) => {
                 alert(
@@ -94,7 +98,7 @@ export default class FileInput extends React.Component {
                             Price currency:
                             <Select
                                 sx={{ height: 30, width: 100 }}
-                                value={this.priceCurrency.value}
+                                value={this.priceCurrency.value ? this.priceCurrency.value : 'EUR' }
                                 ref={this.priceCurrency}
                                 onChange={this.handlePriceCurrencyChange}
                             >
