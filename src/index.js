@@ -21,7 +21,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-import AddTraining from './addTraining.js'
+import CreateTraining from './createTraining.js'
 
 // export const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
 export const backendUrl = "http://localhost:8080/v1/training";
@@ -118,7 +118,7 @@ function UsersComponent() {
           </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <AddTraining setIsLoaded={setIsLoaded}/>
+          <CreateTraining setIsLoaded={setIsLoaded}/>
         </TabPanel>
       </div>
     );
