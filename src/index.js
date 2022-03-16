@@ -23,8 +23,8 @@ import ListItemText from '@mui/material/ListItemText';
 
 import CreateTraining from './createTraining.js'
 
-// export const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
-export const backendUrl = "http://localhost:8080/v1/training";
+export const backendUrl = "https://training-catalog.azurewebsites.net/v1/training";
+//export const backendUrl = "http://localhost:8080/v1/training";
 function UsersComponent() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
